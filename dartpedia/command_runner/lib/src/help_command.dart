@@ -1,0 +1,34 @@
+import 'dart:async';
+import 'arguments.dart';
+
+
+class HelpCommand extends Command {
+  HelpCommand() {
+    addFlag(
+      'verbose',
+      abbr: 'v',
+      help: 'When true, prints each command and its options',
+    );
+    addOption(
+      'command',
+      abbr: 'c',
+      help: 'Prints verbose usage for the specifed command.',
+    );
+  }
+
+  @override
+  String get name => 'help';
+
+  @override
+  String get description => 'Prints usage information to the command line.';
+
+  @override
+  String? get help => 'Print this usage informtion';
+
+  @override
+  FutureOr<Object?> run(ArgResults args) async {
+    var usage = runner.usage;
+    for (var command in runner.commands) { usage += '\n ${command.usage}'; }
+    return usage;
+  }
+}
