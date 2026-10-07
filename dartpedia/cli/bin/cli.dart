@@ -5,6 +5,11 @@ const version = '0.0.1';
 
 
 void main(List<String> args) {
-  var commandRunner = CommandRunner()..addCommand(HelpCommand());
+  var commandRunner = CommandRunner(
+    onError: (Object error) {
+      if (error is Error) { throw error; }
+      if (error is Exception) { print(error); }
+                                    },
+  )..addCommand(HelpCommand());
   commandRunner.run(args);
 }
