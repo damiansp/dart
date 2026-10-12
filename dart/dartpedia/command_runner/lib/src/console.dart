@@ -1,7 +1,7 @@
 import 'dart:io';
 
 
-const Sring ansiEscapeLiteral = '\x1B';
+const String ansiEscapeLiteral = '\x1B';
 
 
 /// Splits strings on \n, then writes each line to console. [duration] defines
@@ -46,7 +46,7 @@ enum ConsoleColor {
   /// print(ConsoleColor.red.enableForeground);
   /// print('hello');  // prints in red
   /// ```
-  String get enableForeground => '$nsiEscapeLiteral[38;2;$r;$g;${b}m';
+  String get enableForeground => '$ansiEscapeLiteral[38;2;$r;$g;${b}m';
 
   /// Change text color for all future output until reset
   /// ```dart
@@ -72,9 +72,9 @@ enum ConsoleColor {
 
 
 extension TextRenderUtils on String {
-  String get errorText => ConsoleColor.red.applyForegrond(this);
-  String get instructionText => ConsoleColor.yellow.applyForegrond(this);
-  String get titleText => ConsoleColor.lightBlue.applyForegrond(this);
+  String get errorText => ConsoleColor.red.applyForeground(this);
+  String get instructionText => ConsoleColor.yellow.applyForeground(this);
+  String get titleText => ConsoleColor.lightBlue.applyForeground(this);
 
   List<String> splitLinesByLength(int length) {
     final List<String> words = split(' ');
